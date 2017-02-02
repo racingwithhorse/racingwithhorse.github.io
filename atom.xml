@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://racingwithhorse.org/"/>
-  <updated>2017-02-02T08:29:03.000Z</updated>
+  <updated>2017-02-02T08:45:39.000Z</updated>
   <id>http://racingwithhorse.org/</id>
   
   <author>
@@ -20,40 +20,37 @@
     <link href="http://racingwithhorse.org/2017/02/01/%E7%A7%A9%E5%BA%8F%E5%92%8C%E9%A1%BA%E5%BA%8F/"/>
     <id>http://racingwithhorse.org/2017/02/01/秩序和顺序/</id>
     <published>2017-02-02T00:52:48.000Z</published>
-    <updated>2017-02-02T08:29:03.000Z</updated>
+    <updated>2017-02-02T08:45:39.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://blog.racingwithhorse.org/images/2017/02/01/hugops-hero.png" alt="hugops-hero"></p>
 <p>不少网友觉得应该将2月1日设立为“世界备份日”。</p>
-<h2 id="Gitlab-Incident-Gitlab-事件"><a href="#Gitlab-Incident-Gitlab-事件" class="headerlink" title="Gitlab Incident Gitlab 事件"></a>Gitlab Incident Gitlab 事件</h2><p>昨晚 (2017/1/31) Gitlab 公司的工程师凌晨在加班工作的时候不小心把生产环境下的300G的网站用户数据给删除了。因为使用了一条 <code>rm -rf</code> 命令。稍微熟悉Linux的朋友可能知道，按下回车后这条命令会递归并且强制的将用户给定目录下的文件和文件夹全部删除。当工程师清醒过来按下 <code>ctrl + c</code> 来停止删除操作时，却只挽留了4.5G的数据，其余所有数据消失殆尽。[1]</p>
-<p>误删除数据时有发生，工程师常常对数据删删改改，误删在所难免。一般重要的数据都会有备份。可今天这个事件的戏剧性就在于，在号称有5中不同备份方式的Gitlab公司里，当管理员不小心删除了300G的数据后，5中方式竟然全部失效，没有一个方式备份了数据，或者备份部分的数据。唯一一个最近的备份是6小时前，且是这位工程师自己手动的一次备份。 </p>
-<p>最后他们索性在 YouTube 上直播工程师恢复数据 [2]，围观者众多，甚是热闹，Gitlab也贴出了大部分观众可能的会问的问题：Who did it, will they be fired? （谁干的？他/他们会被炒鱿鱼吗？）回答是：Someone made a mistake, they won’t be fired. （他/他们只是烦了个工作失误，不会被炒。）</p>
+<h2 id="1-Gitlab-事件"><a href="#1-Gitlab-事件" class="headerlink" title="1. Gitlab 事件"></a>1. Gitlab 事件</h2><p>昨晚 (2017/1/31) Gitlab 公司的工程师凌晨在加班工作的时候不小心把生产环境下的300G的网站用户数据给删除了。因为使用了一条 <code>rm -rf</code> 命令。稍微熟悉Linux的朋友可能知道，按下回车后这条命令会递归并且强制的将用户给定目录下的文件和文件夹全部删除。当工程师清醒过来按下 <code>ctrl + c</code> 来停止删除操作时，却只挽留了4.5G的数据，其余所有数据消失殆尽[1]。</p>
+<p>误删除数据时有发生，工程师常常对数据删删改改，误删在所难免。但一般重要的数据都会有备份。可今天这个事件的戏剧性就在于，在号称有5种不同备份方式的Gitlab公司里，当管理员不小心删除了300G的数据后，5种方式竟然全部失效，没有一个方式备份了全部或部分数据。唯一一个最近的备份是6小时前，且是这位工程师自己手动的一次备份。他们也因此丢失了近6个小时的数据。</p>
+<p>还好Gitlab没有归咎给实习生。他们索性还在YouTube上直播工程师恢复数据[2]，围观者众多，甚是热闹。Youtube也贴出了大部分观众可能的会问的问题：Who did it, will they be fired? （谁干的？他/他们会被炒鱿鱼吗？）回答是：Someone made a mistake, they won’t be fired. （他/他们只是烦了个工作失误，不会被炒。）事故的责任人就是这位 “Team-Member-1”。</p>
 <p><img src="http://blog.racingwithhorse.org/images/2017/02/01/jesuis.jpg" alt="jesuis"></p>
-<p>还好Gitlab没有归咎给实习生。不过和大家一样，土豆同样作为一名工程师（咳咳，码农，码畜）也很好奇到底为什么5种备份同时失效，所以仔细看了下他们的博客。</p>
+<p>不过和大家一样，土豆同样作为一名工程师（咳咳，码农，码畜）也很好奇到底为什么5种备份同时失效，所以仔细看了下他们的博客。</p>
 <p>前因后果：</p>
 <ol>
-<li>1/31日开始，不明攻击者疯狂爆库，Gitlab被插入1.5 million的数据。</li>
+<li>1/31日开始，不明攻击者疯狂爆库，Gitlab被插入1.5 million的垃圾数据。</li>
 <li>2/1日凌晨，工程师1开始辛苦加班，排查肇事用户，删数据。。。</li>
 <li>这个操作直接在生产环境数据库上操作，导致主从数据库同步延迟。</li>
-<li>工程师1开始手动同步两个数据库，接过同步出错。工程师1各种调试。。。而且已经很晚了。工程师1早就表示很想回去。</li>
-<li>工程师1觉得附属数据库重新来同步可能可以此时时间是 2017/01/31 23:00左右 ，然后 <code>rm -rf</code>被执行了。过了一会 （2017/01/31 23:27）工程师1醒悟过来，原本要删除那个附属备份的数据库，结果自己在生产环境的机器上执行了删除命令。</li>
-<li>工程师1，工程师2，工程师3 解释了为什么5中备份同时失效：有两种备份是每隔24小时备份一次，另一种备份方案不备份这个数据库，另外有两种备份不工作。OMG…</li>
+<li>工程师1开始手动同步两个数据库，结果同步出错。工程师1各种调试。。。当时已经很晚了且工程师1早就表示很想回去。</li>
+<li>工程师1觉得删除附属数据库来重新同步或许可以。此时时间是 2017/01/31 23:00左右，然后命令<code>rm -rf</code>被执行了。过了一会（23:27）工程师1意识到本来要删除那个附属备份的数据库，结果自己登录到生产环境的机器上执行了删除命令。</li>
+<li>然后就是工程师1，工程师2，工程师3 解释了为什么5中备份同时失效：有两种备份是每隔24小时备份一次，另一种备份方案不备份这个数据库，另外有两种备份不工作。OMG…</li>
 </ol>
-<p>看完以后，感同身受。很快回想起自己很多类似的场景。某日解决一个问题中，刚开始有些方向，尝试去解决，结果拔出萝卜带出泥，其他地方又不工作，继续搜索解决。此时调试窗口满屏飞，这边命令等结果，那头命令等回车。一会儿连接这个服务器，过会儿删掉那个数据库，改配置，启服务，清缓存，不亦乐乎，怎一个乱乱乱，只道是头大大大。</p>
-<p>工程师1好像就是我。所以看到这个事件，既是同情又有感慨。网上专门有一群人做这样的 Empathy Skill (关怀技巧）来帮助这种因为失误导致的生产灾难。并且使用Tag <code>#HugOps</code>在Twitter发布交流。同时也会提供也些教导。如“Get it together! Why is your service always down?!” （振作起来，为什么你的服务老是下线？！）</p>
+<p>看到这个事件，既是同情又有感慨。感同身受，工程师1好像就是我。很快回想起自己很多类似的场景。某日解决一个问题中，刚开始有些方向，尝试去解决，结果拔出萝卜带出泥，其他地方又不工作，继续搜索解决。此时调试窗口满屏飞，这边命令等结果，那头命令等回车。一会儿连接这个服务器，过会儿删掉那个数据库，改配置，启服务，清缓存，不亦乐乎，怎一个乱乱乱，只道是头大大大。</p>
+<p>之所以写的这么具体是觉得应该大多数人都经历或者曾经经历过。甚至网上专门有一群人做这样的 Empathy Skill (关怀技巧）来帮助这种因为失误导致的生产灾难的工程师。他们使用Tag <code>#HugOps</code>在Twitter鼓励和为工程师们打气，同时也会提供也些教导。如“Get it together! Why is your service always down?!” （振作起来，为什么你的服务老是下线？！）</p>
 <p>当看到这个时候突然发现这帮工程师们也还蛮温暖。</p>
-<h2 id="Get-it-together-Why-is-your-service-always-down-振作起来，为什么你的服务老是下线？"><a href="#Get-it-together-Why-is-your-service-always-down-振作起来，为什么你的服务老是下线？" class="headerlink" title="Get it together! Why is your service always down?! 振作起来，为什么你的服务老是下线？"></a>Get it together! Why is your service always down?! 振作起来，为什么你的服务老是下线？</h2><p>抛开事件和责任不谈，我也常常思考自己做事的问题。怎么做事才能不混乱，如何才能高效。几年前我写了篇博客，当时看了些书，自己总结了3点关于如何高效 [3]：</p>
-<h3 id="1-Efficiency-comes-from-familiarity-and-simplicity"><a href="#1-Efficiency-comes-from-familiarity-and-simplicity" class="headerlink" title="1. Efficiency comes from familiarity and simplicity."></a>1. Efficiency comes from familiarity and simplicity.</h3><p>高效来源于熟练，俗语说：“熟能生巧”。同样的，高效来源于简单。简单不意味着更少。。 简单是对完美的追求，达到某种圆满 (completeness)，是为高效的上限（upper bound），增一分减一分都会招致破坏。简单对爱因斯坦来说是尝试把自然规律用最简单的公式表述出来，那是一种美。对我们工程师来讲，是不去过度的设计。曾经听公司的高层讲，公司产品的每个版本都是基于当时能有的资源、技术和人力给出的最完美的方案。</p>
-<h3 id="2-Say-no-to-1000-things"><a href="#2-Say-no-to-1000-things" class="headerlink" title="2.  Say no to 1000 things."></a>2.  Say no to 1000 things.</h3><p>敢于说不。很重要。我之前的版本加上了 Admitting your incapabilities, say no to 1000 things。现在觉得 “Admitting your incapabilities （承认自己有所不能）”这个不一定适合加在前面。因为有时候的我们更需要在很多东西都可以做，有很多很好的想法可以实现面前去对它们说『不』而且选择最优的。</p>
-<h3 id="3-Be-well-organized-maintained"><a href="#3-Be-well-organized-maintained" class="headerlink" title="3. Be well organized/maintained."></a>3. Be well organized/maintained.</h3><p>有秩序且勤维护。[4]讲到建立和维护自己的一个系统。”罗马不是一天建成的“（Rome was not built in a day）讲到做事的阶段性和累积性，按照顺序一步步来，但是每一步都需要有秩序。有秩序才不会乱。</p>
-<h2 id="秩序与顺序"><a href="#秩序与顺序" class="headerlink" title="秩序与顺序"></a>秩序与顺序</h2><p>今天发现，其实我自己有时候解决问题混乱的主要原因还在于上面的第三点。有秩序和顺序恰恰是我最缺乏的。也是造成我时常混乱头疼的原因。</p>
-<p>有序是对事情当下处理的态度，顺序是对处理事情方向的把握。</p>
-<p>从计算机的角度看，有序是BFS（宽度优先搜索），在问题面前找最近的最好是最优（greedy）的解。顺序是DFS（深度优先搜索），一个问题一直往下钻。虽然都是要回过头来 （backtracking）解决原先的问题，但是我的大脑好像更能够处理BFS，也就是在有秩序的情况下慢慢往前走。用王建林的话就是“先完成一个小目标”。</p>
+<h2 id="2-Get-it-together-Why-is-your-service-always-down-振作起来，为什么你的服务老是下线？！"><a href="#2-Get-it-together-Why-is-your-service-always-down-振作起来，为什么你的服务老是下线？！" class="headerlink" title="2. Get it together! Why is your service always down?! 振作起来，为什么你的服务老是下线？！"></a>2. Get it together! Why is your service always down?! 振作起来，为什么你的服务老是下线？！</h2><p>抛开事件过失和责任不谈，回顾自己常常发生的混乱场面，我在想怎么做事才能不混乱，如何才能高效。几年前我写了篇博客，当时看了些书，自己总结了3点关于如何高效 [3]：</p>
+<h3 id="a-Efficiency-comes-from-familiarity-and-simplicity"><a href="#a-Efficiency-comes-from-familiarity-and-simplicity" class="headerlink" title="a. Efficiency comes from familiarity and simplicity."></a>a. Efficiency comes from familiarity and simplicity.</h3><p>高效来源于熟练，俗语说：“熟能生巧”。同样的，高效来源于简单。简单不意味着更少。简单是对完美的追求，达到某种圆满 (completeness)，是为高效的上限（upper bound），增一分减一分都会招致破坏。简单对爱因斯坦来说是尝试把自然规律用最简单的公式表述出来，那是一种美。对我们工程师来讲，大抵是不去过度的设计。曾经听公司的高层讲，公司产品的每个版本都是基于当时能有的资源、技术和人力给出的最完美的方案。</p>
+<h3 id="b-Say-NO-to-1000-things"><a href="#b-Say-NO-to-1000-things" class="headerlink" title="b.  Say NO to 1000 things."></a>b.  Say NO to 1000 things.</h3><p>敢于说不。很重要。我之前的版本加上了 Admitting your incapabilities, say no to 1000 things。现在觉得 “Admitting your incapabilities （承认自己有所不能）”这个不一定适合加在前面。因为有时候的我们更需要在很多东西都可以做，有很多很好的想法可以实现面前去对它们说『不』而且选择最优的。</p>
+<h3 id="c-Be-well-organized-maintained"><a href="#c-Be-well-organized-maintained" class="headerlink" title="c. Be well organized/maintained."></a>c. Be well organized/maintained.</h3><p>有秩序且勤维护。博客文章[4]里面讲到建立和维护自己的一个系统的建议。”罗马不是一天建成的“（Rome was not built in a day），一样的做事也分阶段和也需要累积，按照顺序一步步来，但是每一步都需要有秩序。有秩序才不会乱。换句话按秩序来才会快。</p>
+<h2 id="秩序与顺序"><a href="#秩序与顺序" class="headerlink" title="秩序与顺序"></a>秩序与顺序</h2><p>今天发现，我自己解决问题混乱的主要原因还在于上面的第三点。秩序和顺序恰恰是我最缺乏的。也是造成我时常混乱头疼的原因。</p>
+<p>有序是对事情当下处理的态度，顺序是对处理事情方向的把握。从计算机的角度看，有序是BFS（宽度优先搜索），在问题面前找最近的最好是最优（greedy）的解。顺序是DFS（深度优先搜索），一个问题一直往下钻。虽然都是要回过头来 （backtracking）解决原先的问题，但是我的大脑好像更能够处理BFS，也就是在有秩序的情况下慢慢往前走。用王建林的话就是“先完成一个小目标”。</p>
 <h2 id="旷野四十二站"><a href="#旷野四十二站" class="headerlink" title="旷野四十二站"></a>旷野四十二站</h2><p><img src="http://blog.racingwithhorse.org/images/2017/02/01/exodus.gif" alt="exodus"></p>
-<p>解决问题和生命成长多么的类似。圣经《民数记》记载了以色列人当初在旷野里面漂流了四十年。从表面上来看，好像他们漂流了四十年。我们如果读民数记33章，我们就知道，原来神对以色列人有一个计划，他们是经过四十二站，然后从埃及才进到迦南。四十二站每一个都不能少，神也将这四十二站的功课按照顺序教导给以色列人。每到一站以色列人安营扎寨，都是规规矩矩有序的按照神借着摩西颁布的会幕蓝图。</p>
+<p>解决问题和生命成长多么的类似。圣经《民数记》记载了以色列人当初在旷野里面漂流了四十年。从表面上来看，好像他们漂流了四十年。我们如果读民数记33章，我们就知道，原来神对以色列人有一个计划，他们是经过四十二站，然后从埃及才进到迦南。四十二站每一个经历都不一样，神也将这四十二站的功课按照顺序教导给以色列人。每到一站以色列人安营扎寨，都是规规矩矩有序的按照神借着摩西颁布的会幕蓝图。</p>
 <p>以色列人旷野的道路岂不就是今天基督徒的成长道路。神在我们生命中的带领也有着顺序，一站一站带着信心往前。但是每一站也都要像保罗教导哥林多教会的圣徒那样的有序『凡事都要规规矩矩地按着次序行。』（哥林多前书14章40节）。</p>
-<p>事情有顺序，做或没做，混乱或者高效的做完，再大的事情也会过去。</p>
-<p>属灵生命的顺序，需按时浇灌以至开花结果。过去了，就再难有收成。</p>
-<p>朋友，你有没有将你的生命打包一份备份在神那里？因为「你的日子如何，你的力量也必如何。」（申33章25节）</p>
+<p>事情有顺序，做或没做，混乱或者高效的做完，再大的事情也会过去。<br>属灵生命的顺序，需按时浇灌以至开花结果。过去了，就再难有收成。<br>朋友，你有没有将你的生命打包一份备份在神那里？</p>
 <p>2017/02/02@12:26AM 于加州</p>
 <hr>
 <p>如果这些文字对你有帮助，或者你也愿意一起寻找，欢迎点击下面的二维码关注我的公众号。知道你很忙，但愿我写出来的文字对得起你看得时间。:-)。<br><img src="http://blog.racingwithhorse.org/images/2016/12/25/qrcode_seek_and_rest_6.jpg" alt="qrcode"></p>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://racingwithhorse.org/"/>
-  <updated>2017-02-02T08:45:39.000Z</updated>
+  <updated>2017-02-02T08:46:45.000Z</updated>
   <id>http://racingwithhorse.org/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>rm -rf vs 秩序和顺序</title>
+    <title>从 rm -rf 看秩序和顺序</title>
     <link href="http://racingwithhorse.org/2017/02/01/%E7%A7%A9%E5%BA%8F%E5%92%8C%E9%A1%BA%E5%BA%8F/"/>
     <id>http://racingwithhorse.org/2017/02/01/秩序和顺序/</id>
     <published>2017-02-02T00:52:48.000Z</published>
-    <updated>2017-02-02T08:45:39.000Z</updated>
+    <updated>2017-02-02T08:46:45.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://blog.racingwithhorse.org/images/2017/02/01/hugops-hero.png" alt="hugops-hero"></p>
 <p>不少网友觉得应该将2月1日设立为“世界备份日”。</p>

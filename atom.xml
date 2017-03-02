@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://racingwithhorse.org/"/>
-  <updated>2017-03-02T08:11:08.000Z</updated>
+  <updated>2017-03-02T08:12:35.000Z</updated>
   <id>http://racingwithhorse.org/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://racingwithhorse.org/2017/03/01/%E6%88%90%E9%95%BF-%E6%94%B9%E5%8F%98-%E7%AA%81%E7%A0%B4/"/>
     <id>http://racingwithhorse.org/2017/03/01/成长-改变-突破/</id>
     <published>2017-03-02T07:01:45.000Z</published>
-    <updated>2017-03-02T08:11:08.000Z</updated>
+    <updated>2017-03-02T08:12:35.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="一、引子"><a href="#一、引子" class="headerlink" title="一、引子"></a>一、引子</h2><p>炒股的人在分析股票的时候常常看两条线：支撑线 （support line）和阻力线（resistent line）。借着这两条线和一些 K 线图模型去寻找那些有可能在中短期突破（break out）- 价格大幅上涨的股票。</p>
+    <content type="html"><![CDATA[<p><img src="http://blog.racingwithhorse.org/images/2017/03/01/stock.jpg" alt="Stock"></p>
+<h2 id="一、引子"><a href="#一、引子" class="headerlink" title="一、引子"></a>一、引子</h2><p>炒股的人在分析股票的时候常常看两条线：支撑线 （support line）和阻力线（resistent line）。借着这两条线和一些 K 线图模型去寻找那些有可能在中短期突破（break out）- 价格大幅上涨的股票。</p>
 <p>很少有股票不跌一直上涨的。绩优（蓝筹股）股票也大多数是在一个大致的上升通道里面，起起伏伏。</p>
 <p>在某个区间，股票下跌到某个价位不在继续下跌时，就是这一区间的最低点。多个区间的最低点连成一条线就是支持线。</p>
 <p>同样的，在某个区间，股票上涨到一最高价位不能再继续攀升反而开始回落时，就变成这一区间的最高点。多个区间的最高点连成一条线就是阻力线。</p>
@@ -55,7 +56,8 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;一、引子&quot;&gt;&lt;a href=&quot;#一、引子&quot; class=&quot;headerlink&quot; title=&quot;一、引子&quot;&gt;&lt;/a&gt;一、引子&lt;/h2&gt;&lt;p&gt;炒股的人在分析股票的时候常常看两条线：支撑线 （support line）和阻力线（resistent line）。借着这两
+      &lt;p&gt;&lt;img src=&quot;http://blog.racingwithhorse.org/images/2017/03/01/stock.jpg&quot; alt=&quot;Stock&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一、引子&quot;&gt;&lt;a href=&quot;#一、引子&quot; class=&quot;headerlink&quot; 
     
     </summary>
     
@@ -69,9 +71,10 @@
     <link href="http://racingwithhorse.org/2017/02/26/%E4%BB%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%92%8C%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9C%8B%E4%BF%A1%E4%BB%BB/"/>
     <id>http://racingwithhorse.org/2017/02/26/从网络安全和区块链看信任/</id>
     <published>2017-02-26T23:08:36.000Z</published>
-    <updated>2017-02-26T23:40:31.000Z</updated>
+    <updated>2017-03-02T08:12:14.000Z</updated>
     
-    <content type="html"><![CDATA[<p>今天的很多行业都是由于人的罪性才产生的。比如安全行业。要说传统的安全行业是出于对人或设备或流程的一种保障措施。现今的网络安全，金融安全，网上隐私安全行业的产生则是完完全全出于人类的自私自利的结果。网络安全（network security）与隐私（privacy）几乎伴随着互联网的诞生而产生。</p>
+    <content type="html"><![CDATA[<p><img src="http://blog.racingwithhorse.org/images/2017/02/26/trust.png" alt="Trust"></p>
+<p>今天的很多行业都是由于人的罪性才产生的。比如安全行业。要说传统的安全行业是出于对人或设备或流程的一种保障措施。现今的网络安全，金融安全，网上隐私安全行业的产生则是完完全全出于人类的自私自利的结果。网络安全（network security）与隐私（privacy）几乎伴随着互联网的诞生而产生。</p>
 <h2 id="隐私（privacy）与安全（security）"><a href="#隐私（privacy）与安全（security）" class="headerlink" title="隐私（privacy）与安全（security）"></a>隐私（privacy）与安全（security）</h2><p>隐私与安全不完全相同，隐私针对的是我们个人的资料，信息的保护。尤其是处于网联网大数据时代（big data era），个人信息不可避免的要被传到网上，与此同时每个人只要接触网络，也不可避免的产生很多数据。比如我们父母辈似乎觉得很少接触网络，但是他们的身份证，护照之类的隐私信息也有可能泄露。再比如我们上网的浏览历史可能会被收集用来投放广告，亦或者我们每天的位置信息，运动数据，身体健康数据都有可能被泄露。甚至我们每时每刻都面临着被无处不在的网络摄像头所监控。</p>
 <p>网络安全不光保护我们的隐私，还要防止第三方攻击者对隐私和未经授权信息的访问和使用。</p>
 <p>举个简单的例子说明隐私与安全。假如你经常把照片上传到网络上作为备份，这当中包括你的私人和家庭照片。这里面存在三方。你，网站照片存储服务提供商，黑客或者任何你觉得不应该看到照片的第三方。当你因为信任把照片传到网上，提供服务商首先需要处理隐私问题，包括但不限于网站管理人员是否可以观看你的照片？与网站有关系的第三方网站是否可以拥有你的照片？同时网站还需要确保你的照片不被第三方所非法观看和下载分享，这就是网络安全要做的。</p>
@@ -104,7 +107,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;今天的很多行业都是由于人的罪性才产生的。比如安全行业。要说传统的安全行业是出于对人或设备或流程的一种保障措施。现今的网络安全，金融安全，网上隐私安全行业的产生则是完完全全出于人类的自私自利的结果。网络安全（network security）与隐私（privacy）几乎伴随着
+      &lt;p&gt;&lt;img src=&quot;http://blog.racingwithhorse.org/images/2017/02/26/trust.png&quot; alt=&quot;Trust&quot;&gt;&lt;/p&gt;
+&lt;p&gt;今天的很多行业都是由于人的罪性才产生的。比如安全行业。要说传统的安全行业是出于对人或设备或流
     
     </summary>
     
